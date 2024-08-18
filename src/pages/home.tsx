@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import * as yup from 'yup';
 import Form from "../components/form";
 import { useNavigate } from 'react-router-dom';
+import apiClient from '../utils/axios';
+import axios from 'axios';
 
 const formSchema = yup.object().shape({
     hostname: yup.string().required('Hostname is required'),
@@ -32,12 +34,26 @@ const Home: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
+    
         try {
             await formSchema.validate(formData, { abortEarly: false });
-             console.log('Valid data:', formData);
+            console.log('Valid data:', formData);
             setErrors({});
-            navigate("/view")
+    
+            try {
+                await apiClient.post("", formData, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                navigate("/view");
+            } catch (error) {
+                if (axios.isAxiosError(error)) {
+                    console.error('Axios error:', error.response?.data || error.message);
+                } else {
+                    console.error('Unexpected error:', error);
+                }
+            }
         } catch (err) {
             const validationErrors: { [key: string]: string } = {};
             if (err instanceof yup.ValidationError) {
