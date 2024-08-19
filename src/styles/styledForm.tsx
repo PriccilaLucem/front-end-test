@@ -12,6 +12,14 @@ const StyledForm = styled.form`
         margin: 20px;
         border-radius: 1rem;
         width: 200px;
+        height: 20px;
+    }
+    button{
+        background-color: red;
+        width: 100px;
+        height: 20px;
+        border-radius: 10px;
+        margin-bottom: 10px;
     }
 ` 
 

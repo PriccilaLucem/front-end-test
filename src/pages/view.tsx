@@ -2,6 +2,8 @@
 import { useState } from "react";
 import apiClient from "../utils/axios";
 import {Session, ApiResponse} from "../interface/session";
+import Ul from "../styles/styledUl";
+import Header from "../styles/styledHeader";
 
 const View = () => {
     const [response, setResponse] = useState<Session[]>([]);
@@ -12,17 +14,20 @@ const View = () => {
             });
     return (
         <>
-            <ul>
+        <Header>
+            <h1>Sessions</h1>
+        </Header>
+            <Ul>
                 {response.map((item) => (
                         <li key={item.id}>
-                            <strong>Hostname:</strong> {item.hostname}<br />
-                            <strong>Players:</strong> {item.players}<br />
-                            <strong>Map:</strong> {item.map}<br />
-                            <strong>Mode:</strong> {item.mode}
+                            <div>Hostname: {item.hostname}</div>
+                            <div>Players: {item.players}</div>
+                            <div>Map: {item.map}</div>
+                            <div>Mode: {item.mode}</div>
                         </li>
                     ))
                 }
-            </ul>
+            </Ul>
         </>
     );
 }

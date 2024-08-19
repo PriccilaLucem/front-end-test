@@ -4,6 +4,7 @@ import Form from "../components/form";
 import { useNavigate } from 'react-router-dom';
 import apiClient from '../utils/axios';
 import axios from 'axios';
+import Header from '../styles/styledHeader';
 
 const formSchema = yup.object().shape({
     hostname: yup.string().required('Hostname is required'),
@@ -69,9 +70,9 @@ const Home: React.FC = () => {
 
     return (
         <>  
-            <header>
-                <h1>Create your game section</h1>
-            </header>
+            <Header>
+                <h1>Create your game session</h1>
+            </Header>
             <Form onSubmit={handleSubmit}>
                 <input
                     placeholder="hostname"
